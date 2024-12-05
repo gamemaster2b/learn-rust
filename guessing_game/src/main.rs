@@ -1,28 +1,40 @@
 use rand::prelude::*;
+use std::cmp::Ordering;
 use std::io::{self, Write};
 
 fn main() {
-    print!("Guess a number from 1 to 100: ");
-    io::stdout().flush().expect("flush failed!");
+    let secret_number: u8 = thread_rng().gen_range(1..=100);
 
-    let secret_number: u8 = rand::thread_rng().gen_range(1..=100);
+    println!("Guess a number from 1 to 100.");
 
-    let mut guess = String::new();
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("Failed to read line");
+    loop {
+        print!("Guess: ");
+        io::stdout().flush().expect("flush failed!");
 
-    let guess = match guess.trim().parse::<u8>() {
-        Ok(num) => num,
-        Err(_) => panic!("Please type a number!"),
-    };
+        let mut guess = String::new();
+        match io::stdin().read_line(&mut guess) {
+            Ok(_) => {}
+            Err(e) => {
+                println!("Failed to read line: {:?}", e);
+                continue;
+            }
+        };
 
-    println!(
-        "You guessed \"{}\" is {}.",
-        guess,
-        match guess.eq(&secret_number) {
-            true => "right🎆",
-            false => "wrong⛔",
+        let guess = match guess.trim().parse::<u8>() {
+            Ok(num) => num,
+            Err(e) => {
+                println!("Please enter a number from 1 to 100! {:?}", e);
+                continue;
+            }
+        };
+
+        match guess.cmp(&secret_number) {
+            Ordering::Equal => {
+                println!("Congratulations! You guessed the number: 🥰");
+                break;
+            }
+            Ordering::Greater => println!("It won't fit: 🥵"),
+            Ordering::Less => println!("Size doesn't matter: 🥶"),
         }
-    );
+    }
 }
