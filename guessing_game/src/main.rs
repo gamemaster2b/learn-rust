@@ -1,10 +1,11 @@
 use rand::prelude::*;
-use std::io;
+use std::io::{self, Write};
 
 fn main() {
     print!("Guess a number from 1 to 100: ");
+    io::stdout().flush().expect("flush failed!");
 
-    let screte_number: u8 = rand::thread_rng().gen_range(1..=100);
+    let secret_number: u8 = rand::thread_rng().gen_range(1..=100);
 
     let mut guess = String::new();
     io::stdin()
@@ -19,7 +20,7 @@ fn main() {
     println!(
         "You guessed \"{}\" is {}.",
         guess,
-        match guess.eq(&screte_number) {
+        match guess.eq(&secret_number) {
             true => "right🎆",
             false => "wrong⛔",
         }
