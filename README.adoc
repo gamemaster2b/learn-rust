@@ -14,7 +14,7 @@ Values can be initialized at declaration or later in the code.
 
 [source,rust]
 ----
-include::variables/src/main.rs[tag=declaration]
+include::./variables/src/main.rs[tag=declaration]
 ----
 
 === mutability
@@ -29,7 +29,7 @@ include::variables/src/main.rs[tag=mutability]
 === Constants
 
 Constants are declared using the 'const' keyword are immutable. +
-They can not be made mutable.
+:source-highlighter: highlight.js They can not be made mutable.
 Adding 'mut' will result in a compile time error.
 
 [source,rust]
