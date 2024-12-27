@@ -5,7 +5,7 @@ use std::io::{self, Write};
 fn main() {
     let secret_number: u8 = thread_rng().gen_range(1..=100);
 
-    println!("Guess a number from 1 to 100.");
+    print!("Guess a number from 1 to 100.");
 
     loop {
         print!("\nGuess: ");
