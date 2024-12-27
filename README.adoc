@@ -2,6 +2,7 @@
 William <william@mrjaeger.net>
 :stem: latexmath
 :imagesdir: .assets/images
+:source-highlighter: highlight.js
 :toc:
 
 == Variables
@@ -27,7 +28,8 @@ include::variables/src/main.rs[tag=mutability]
 
 === Constants
 
-Constants are declared using the 'const' keyword are immutable.<br/> They can not be made mutable.
+Constants are declared using the 'const' keyword are immutable. +
+They can not be made mutable.
 Adding 'mut' will result in a compile time error.
 
 [source,rust]
