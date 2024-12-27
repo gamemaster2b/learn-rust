@@ -6,7 +6,10 @@ William <william@mrjaeger.net>
 
 == Variables
 
-=== Declaration
+=== Declaration & Initialization
+
+Variables are declared using the 'let' keyword and immutable by default. +
+Values can be initialized at declaration or later in the code.
 
 [source,rust]
 ----
@@ -15,14 +18,31 @@ include::variables/src/main.rs[tag=declaration]
 
 === mutability
 
+'mut' is used to make a variable mutable.
+
 [source,rust]
 ----
 include::variables/src/main.rs[tag=mutability]
 ----
 
-=== constants
+=== Constants
+
+Constants are declared using the 'const' keyword are immutable.<br/> They can not be made mutable.
+Adding 'mut' will result in a compile time error.
+
+[source,rust]
+----
+include::variables/src/main.rs[tag=constants-a]
+
+main() {
+include::variables/src/main.rs[tag=constants-b]
+}
+----
 
 === shadowing
+
+Shadowing is the declaration of new variable using the name of a preexisting variable. +
+The compiler identifies the second variable by the name until it leaves the scope or the second variable shadowed by another
 
 [source,rust]
 ----
