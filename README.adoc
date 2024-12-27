@@ -1,0 +1,32 @@
+= Notes
+William <william@mrjaeger.net>
+:stem: latexmath
+:imagesdir: .assets/images
+:toc:
+
+== Variables
+
+=== Declaration
+
+[source,rust]
+----
+include::variables/src/main.rs[tag=declaration]
+----
+
+=== mutability
+
+[source,rust]
+----
+include::variables/src/main.rs[tag=mutability]
+----
+
+=== constants
+
+=== shadowing
+
+[source,rust]
+----
+include::variables/src/main.rs[tags=mutability;shadowing]
+----
+
+== Data Types
