@@ -178,6 +178,68 @@ include::data-types/src/main.rs[tag=char]
 
 === Compound Types
 
+Compound types can group multiple values into one type. Rust has two primitive compound types: tuples and arrays.
+
 ==== The Tuple Type
 
+[,rust]
+----
+include::data-types/src/main.rs[tags=destructure;tuple;!*]
+----
+
+[,rust]
+----
+include::data-types/src/main.rs[tags=index;tuple;!*]
+----
+
 ==== The Array Type
+
+arrays in Rust have a fixed length.
+
+.Creating Arrays
+[,rust]
+----
+include::data-types/src/main.rs[tags=create;array;!*]
+----
+
+.Accessing Array Elements
+[,rust]
+----
+include::data-types/src/main.rs[tags=array;index-array;!*]
+----
+
+.Invalid Array Element Access
+****
+[,rust]
+----
+use std::io;
+
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+
+    println!("Please enter an array index.");
+
+    let mut index = String::new();
+
+    io::stdin()
+        .read_line(&mut index)
+        .expect("Failed to read line");
+
+    let index: usize = index
+        .trim()
+        .parse()
+        .expect("Index entered was not a number");
+
+    let element = a[index];
+
+    println!("The value of the element at index {index} is: {element}");
+}
+----
+
+This code compiles successfully. If you run this code using cargo run and enter 0, 1, 2, 3, or 4, the program will print out the corresponding value at that index in the array. If you instead enter a number past the end of the array, such as 10, you’ll see output like this:
+
+----
+thread 'main' panicked at 'index out of bounds: the len is 5 but the index is 10', src/main.rs:19:19
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+----
+****
