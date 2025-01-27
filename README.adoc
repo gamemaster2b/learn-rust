@@ -29,7 +29,7 @@ include::variables/src/main.rs[tag=mutability]
 === Constants
 
 Constants are declared using the 'const' keyword are immutable. +
-:source-highlighter: highlight.js They can not be made mutable.
+They can not be made mutable.
 Adding 'mut' will result in a compile time error.
 
 [source,rust]
@@ -52,3 +52,63 @@ include::variables/src/main.rs[tags=mutability;shadowing]
 ----
 
 == Data Types
+
+=== Scalar Types
+
+This represent single values.
+
+Rust four primary scalar Types:
+
+* integers
+* floating-point
+* numbers
+* Booleans
+* characters
+
+==== Integer Types
+
+|===
+|Length |signed |unsigned
+
+|8-bit
+|i8
+|u8
+
+|16-bit
+|i16
+|u16
+
+|32-bit
+|i32
+|u32
+
+|64-bit
+|i64
+|u64
+
+|128-bit
+|i128
+|u128
+
+|arch
+|isize
+|usize
+|===
+
+.Integer Overflow
+****
+****
+
+==== Floating-Point Types
+
+==== Numeric Operations
+
+==== The Boolean Type
+
+==== The Character Type
+
+=== Compound Types
+
+==== The Tuple Type
+
+==== The Array Type
