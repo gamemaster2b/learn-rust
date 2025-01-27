@@ -57,13 +57,7 @@ include::variables/src/main.rs[tags=mutability;shadowing]
 
 This represent single values.
 
-Rust four primary scalar Types:
-
-* integers
-* floating-point
-* numbers
-* Booleans
-* characters
+Rust four primary scalar Types: integers, floating-point, numbers, Booleans, characters
 
 ==== Integer Types
 
@@ -156,6 +150,8 @@ When you're compiling in release mode with the --release flag, Rust does not inc
 ==== Floating-Point Types
 
 Floating-point numbers are represented according to the IEEE-754 standard. The f32 type is a single-precision float, and f64 has double precision.
+
+The default type is f64 because on modern CPUs, it’s roughly the same speed as f32 but is capable of more precision. All floating-point types are signed.
 
 [source,rust]
 ----
