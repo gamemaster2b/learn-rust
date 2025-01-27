@@ -1,0 +1,6 @@
+= Ownership
+William <william@mrjaeger.net>
+:stem: latexmath
+:imagesdir: .assets/images
+:source-highlighter: highlight.js
+:toc:
