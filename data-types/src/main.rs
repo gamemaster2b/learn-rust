@@ -69,7 +69,7 @@ fn main() {
 
     let mut index = String::new();
 
-    io::stdin()
+    std::io::stdin()
         .read_line(&mut index)
         .expect("Failed to read line");
 
