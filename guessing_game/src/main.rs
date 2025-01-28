@@ -1,10 +1,9 @@
 use colored::*;
-use rand::prelude::*;
 use std::cmp::Ordering;
 use std::io::{self, Write};
 
 fn main() {
-    let secret_number: u8 = rand::rng().random_range(1..=100);
+    let secret_number: u8 = rand::random_range(1..=100);
 
     print!("Guess a number from 1 to 100.");
 
