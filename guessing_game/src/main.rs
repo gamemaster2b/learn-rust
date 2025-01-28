@@ -4,7 +4,7 @@ use std::cmp::Ordering;
 use std::io::{self, Write};
 
 fn main() {
-    let secret_number: u8 = thread_rng().gen_range(1..=100);
+    let secret_number: u8 = rand::thread_rng().gen_range(1..=100);
 
     print!("Guess a number from 1 to 100.");
 
