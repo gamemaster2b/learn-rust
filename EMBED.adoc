@@ -1,0 +1,197 @@
+= Embedded Rust
+William <william@mrjaeger.net>
+:toc:
+:hide-uri-scheme:
+
+== Get Set Up
+
+https://docs.rust-embedded.org/discovery/microbit/03-setup/index.html[ Follow this section to pre-setup your machine]
+
+=== Tooling
+
+> cargo-binstall can be used in place of cargo-install for faster install of binaries. +
+> Example: cargo binstall cargo-expand
+
+==== rustup
+
+To get started with embedded Rust, you'll need to install the `rustup` toolchain. +
+Visit the https://rustup.rs website and follow the instructions to install the toolchain.
+
+I f already have `rustup` installed, you can update it by running the following command:
+
+[,console]
+----
+rustup update
+----
+
+==== llvm-tools
+
+[,console]
+----
+rustup component add llvm-tools
+----
+
+===== cargo-binutils
+
+[,console]
+----
+cargo binstall cargo-binutils
+----
+
+==== cargo-embed
+
+[,console]
+----
+cargo binstall probe-rs-tools
+----
+
+=== IDE
+
+==== VScode
+
+Install the `rust-analyzer` extension for VScode.
+
+----
+ext install rust-lang.rust-analyzer
+----
+
+==== RustRover
+
+== Hardware
+
+=== Target
+
+Find the relevant target for your hardware on https://doc.rust-lang.org/stable/rustc/platform-support.html[Plartform Support].
+
+Consider the following: <arch><sub>-<vendor>-<sysroot>-<env>
+
+* arch = x86_64, i386,arm, ...
+* sub = arm: v7, v8, ...
+* ISA = [optional] thumb, aarch64, ...
+* subarch = arm: cortex-m0, cortex-m3, cortex-m4, ...
+* vendor = [optional] none, apple, pc, nvidia, intel, arm, ...
+* sysroot = [optional] none, linux, android, ios, windows, ...
+* env = [optional] none, gnu, musl, uclibc, eabi, elf, ...
+
+Use rustup to install the target:
+
+----
+rustup target add <target>
+----
+
+add the target to the cargo configuration '.cargo/config.toml':
+
+[,toml]
+----
+[build]
+target = "<target>"
+----
+
+.Micro:Bit v2
+****
+Processor: https://docs.nordicsemi.com/category/nrf52833-category[nRF52833] - Arm Cortex-M4 32 bit processor with FPU - https://developer.arm.com/Processors/Cortex-M4[specifications] +
+Arch: Armv7E-M +
+ISA: Thumbv7em +
+Subarch: Cortex-M4
+
+Therefore, the target would be `thumbv7em-none-eabihf`
+[,console]
+----
+rustup target add thumbv7em-none-eabihf
+----
+****
+
+.ESP8266
+****
+Module: https://www.espressif.com/en/products/socs/esp8266[esp8266] +
+Processor: Tensilica L106 32 bit processor - Xtensa LX106 - which uses Xtensa ISA
+
+Which is not suported; refer to https://docs.esp-rs.org/book/overview/index.html[Rust ESP Book]
+****
+
+== Project Setup
+
+=== Create a new project
+
+Create a new project using cargo:
+
+[,console]
+----
+cargo new --bin <project-name>
+----
+
+==== No Standard Library
+
+Navigate to the project directory. +
+Add the following dependencies to the `src/main.rs` file:
+
+[,rust]
+----
+#![no_std]
+#![no_main]
+
+fn main() {
+    println!("Hello, world!");
+}
+----
+
+#![no_std] and #![no_main] tell the compiler that we are not using the standard library and that we are defining the entry point for the program.
+
+==== Dependencies
+
+Get the relevant https://crates.io/keywords/startup[startup] and https://crates.io/keywords/runtime[runtime] crate for your target or make it yourself. +
+Add the dependencies to your project using cargo:
+
+[,console]
+----
+cargo add <startup-crate> <runtime-crate>
+----
+
+.Micro:Bit v2
+****
+'cortex-m-rt' and 'cortex-m' crates are used for the startup and runtime respectively.
+
+[,console]
+----
+cargo add cortex-m-rt cortex-m
+----
+
+cortem-m-rt requires a linker script to be present in the project directory. +
+Create a new file called `memory.x` in the project directory and add the following:
+
+[,]
+----
+MEMORY
+{
+  FLASH : ORIGIN = 0x00000000, LENGTH = 512K
+  RAM : ORIGIN = 0x20000000, LENGTH = 128K
+}
+----
+
+The `memory.x` file defines the memory layout of the target hardware.
+
+procede to add an entry point to the `src/main.rs` file:
+
+[,rust]
+----
+#![no_std]
+#![no_main]
+
+use cortex_m_rt::entry;
+
+#[entry]
+fn main() -> ! {
+    loop {
+        // your code here
+    }
+}
+----
+****
+
+==== Panic Handler
+
+crate 'panic-halt'
+
+=== Flash
+
+use cargo-embed
