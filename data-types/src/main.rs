@@ -1,3 +1,5 @@
+#![allow(unused)]
+
 fn main() {
     // tag::floating-point[]
     let x = 2.0; // f64
