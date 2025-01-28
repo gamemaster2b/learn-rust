@@ -1,4 +1,14 @@
 [workspace]
-
-members = ["guessing_game", "hello_world", "variables"]
+members = [
+    "guessing_game",
+    "hello_world",
+    "snake_microbit",
+    "variables",
+    "microbit",
+    "data-types", "structs-enums",
+]
 resolver = "3"
+
+[workspace.dependencies]
+microbit = { version = "0.15", package = "microbit-v2" }
+rand = "0.9"
