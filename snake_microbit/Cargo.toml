@@ -5,6 +5,6 @@ edition = "2024"
 
 [dependencies]
 cortex-m = "*"
-cortex-m-rt = "0.7.5"
+cortex-m-rt = "*"
 microbit = { version = "*", package = "microbit-v2" }
 panic-halt = "*"
