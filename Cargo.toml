@@ -5,7 +5,7 @@ members = [
     "snake_microbit",
     "variables",
     "microbit",
-    "data-types", "structs-enums",
+    "data-types", "structs-enums", "mini-redis",
 ]
 resolver = "3"
 
