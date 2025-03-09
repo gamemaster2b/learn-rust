@@ -23,5 +23,7 @@ async fn main() -> Result<()> {
 
     println!("got value from the server; result={:?}", result);
 
+    println!("\nHello, {:#?}", result.unwrap());
+
     Ok(())
 }
