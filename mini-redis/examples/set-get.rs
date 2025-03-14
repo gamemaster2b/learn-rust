@@ -29,15 +29,13 @@ async fn task(name: &str) {
         if let Some(value) = client.get(&(key.to_string())[..]).await.unwrap() {
             println!("{} read: {:?}", name, value);
         } else {
+            let value = format!("{} wrote {}", name, key);
             match client
-                .set(
-                    &(key.to_string())[..],
-                    format!("{} wrote {}", name, key).into(),
-                )
+                .set(&(key.to_string())[..], value.clone().into())
                 .await
             {
                 Ok(_) => {
-                    println!("{} wrote {}", name, key)
+                    println!("{value}");
                 }
                 Err(e) => {
                     eprintln!("{} failed to write {} because {:?}", name, key, e)
