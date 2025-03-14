@@ -531,6 +531,7 @@ dependencies = [
 name = "mini-redis"
 version = "0.1.0"
 dependencies = [
+ "bytes",
  "mini-redis 0.4.1",
  "tokio",
 ]
