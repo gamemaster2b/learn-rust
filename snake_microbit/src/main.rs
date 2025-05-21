@@ -4,6 +4,7 @@
 
 use cortex_m_rt::entry;
 use panic_halt as _;
+use rtt_target::rprintln;
 
 #[entry]
 fn main() -> ! {

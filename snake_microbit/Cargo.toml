@@ -8,3 +8,5 @@ cortex-m = "*"
 cortex-m-rt = "*"
 microbit = { version = "*", package = "microbit-v2" }
 panic-halt = "*"
+rtt-target = { version = "*", features = ["cortex-m"] }
+panic-rtt-target = { version = "*", features = ["cortex-m"] }
